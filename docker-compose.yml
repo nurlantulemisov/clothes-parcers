@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+    python:
+        build: .
+        networks:
+            - app-network
+        ports: 
+            - 83:83
+
+#Docker Networks
+networks:
+    app-network:
+      driver: bridge
