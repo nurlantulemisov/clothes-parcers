@@ -1,14 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from typing import List
 from detail.size import Size
 from detail.detail import Detail
 from detail.price import Price
 import collections
 import enum
+
 
 class Zara(enum.Enum):
     parcer_code = 1
@@ -45,7 +42,8 @@ class Zara(enum.Enum):
         op = webdriver.ChromeOptions()
         op.add_argument('headless')
         driver = webdriver.Chrome('./driver/macOS/chromedriver', options=op)
-        driver.get("https://www.zara.com/ru/ru/search?searchTerm=" + self.item_code) #5479200800
+        driver.get("https://www.zara.com/ru/ru/search?searchTerm=" +
+                   self.item_code)  # 5479200800
         driver.implicitly_wait(10)
         product_grid = driver.find_element_by_css_selector(".product-list")
         thumbnail = product_grid.find_element_by_css_selector(
@@ -57,7 +55,7 @@ class Zara(enum.Enum):
         driver.get(reference)
         driver.implicitly_wait(10)
 
-        #todo add price and name
+        # todo add price and name
         clothes = Detail('', reference, thumbnail, self.find_color(
             driver), self.find_sizes(driver), [Price(1000, False)])
         driver.close()

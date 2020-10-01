@@ -1,5 +1,6 @@
 import json
 
+
 class Price:
     def __init__(self, price: int, disable: bool):
         self.price = price
