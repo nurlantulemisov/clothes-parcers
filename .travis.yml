@@ -6,4 +6,4 @@ install:
 jobs:
   include:
     - stage: code-style
-      script: flask8 ./
+      script: flake8 ./
