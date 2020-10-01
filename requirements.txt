@@ -1,2 +1,3 @@
 selenium
 pika
+python-daemon
