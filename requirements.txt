@@ -1,3 +1,5 @@
 selenium
 pika
 python-daemon
+flake8
+autopep8
