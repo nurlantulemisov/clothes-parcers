@@ -24,7 +24,7 @@ def task_handle(msg: str):
 
 
 def callback(channel, method, properties, body: str):
-    #pylint: disable=unused-argument
+    # pylint: disable=unused-argument
     """Callback consumer"""
     task_handle(body)
 

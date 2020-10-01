@@ -21,26 +21,29 @@ class Zara(enum.Enum):
 
     @staticmethod
     def find_color(driver: webdriver) -> str:
-        #pylint: disable=missing-function-docstring
+        # pylint: disable=missing-function-docstring
         color_clothe = driver.find_element_by_css_selector("._colorName")
         return color_clothe.text
 
     def find_sizes(self, driver: webdriver) -> List[Size]:
-        #pylint: disable=missing-function-docstring
+        # pylint: disable=missing-function-docstring
         sizes = driver.find_elements_by_css_selector(
             '.size-list .product-size')
         obj_sizes = []
         for size in sizes:
             deque_size_types = collections.deque(
                 size.get_attribute('data-name').split(' ('), 2)
-            obj_size = Size(deque_size_types.popleft(), self.clean_nubmer_size(
-                deque_size_types.popleft()), "disabled" in size.get_attribute("class"))
+            obj_size = Size(
+                deque_size_types.popleft(),
+                self.clean_nubmer_size(
+                    deque_size_types.popleft()),
+                "disabled" in size.get_attribute("class"))
             obj_sizes.append(obj_size)
         return obj_sizes
 
     @staticmethod
     def clean_nubmer_size(subject: str) -> str:
-        #pylint: disable=missing-function-docstring
+        # pylint: disable=missing-function-docstring
         replace = subject.split(')')
         return replace[0].split(' ')[1]
 
@@ -48,7 +51,9 @@ class Zara(enum.Enum):
         """Запускает задачу на сбор данных"""
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        driver = webdriver.Chrome('./driver/macOS/chromedriver', options=options)
+        driver = webdriver.Chrome(
+            './driver/macOS/chromedriver',
+            options=options)
         driver.get("https://www.zara.com/ru/ru/search?searchTerm=" +
                    self.item_code)  # 5479200800
         driver.implicitly_wait(10)
