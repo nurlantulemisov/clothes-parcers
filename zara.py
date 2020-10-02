@@ -9,6 +9,7 @@ from selenium import webdriver
 from detail.size import Size
 from detail.detail import Detail
 from detail.price import Price
+import settings
 
 
 class Zara(enum.Enum):
@@ -52,7 +53,7 @@ class Zara(enum.Enum):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         driver = webdriver.Chrome(
-            './driver/macOS/chromedriver',
+            settings.DRIVER_PATH,
             options=options)
         driver.get("https://www.zara.com/ru/ru/search?searchTerm=" +
                    self.item_code)  # 5479200800

@@ -11,6 +11,7 @@ from typing import List
 from detail.size import Size
 from detail.price import Price
 from detail.detail import Detail
+import settings
 
 
 def get_prices(price_elements: webdriver) -> List[Price]:
@@ -46,7 +47,7 @@ def is_disable_price(price_element: webdriver) -> bool:
 def run() -> Detail:
     op = webdriver.ChromeOptions()
     # op.headless = True
-    driver = webdriver.Chrome('./driver/macOS/chromedriver', options=op)
+    driver = webdriver.Chrome(settings.DRIVER_PATH, options=op)
     driver.get("https://www2.hm.com/ru_ru/search-results.html?q=0916468003")
     try:
         product = WebDriverWait(driver, 5).until(
