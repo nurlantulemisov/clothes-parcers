@@ -4,11 +4,11 @@
 И отправка обратно в очередь
 """
 
-import os
 import json
 import pika
 import daemon
 import zara
+import settings
 
 
 def task_handle(msg: str):
@@ -31,7 +31,7 @@ def callback(channel, method, properties, body: str):
 
 def consume():
     """daemon consumer"""
-    url = os.environ.get('CLOUDAMQP_URL', 'amqp://app:qwerty@0.0.0.0:5672/%2f')
+    url = settings.CLOUDAMQP_URL
     params = pika.URLParameters(url)
     connection = pika.BlockingConnection(params)
     channel = connection.channel()  # start a channel
