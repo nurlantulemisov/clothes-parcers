@@ -1,10 +1,18 @@
-from typing import List
-from detail.size import Size
-from detail.price import Price
-import json
+"""
+Detail class
+"""
 
+from typing import List
+import json
+from size import Size
+from price import Price
+
+
+# pylint: disable=missing-function-docstring
+# pylint: disable=too-many-arguments
 
 class Detail:
+    """Detail class"""
     def __init__(
         self,
         name: str,
@@ -27,5 +35,5 @@ class Detail:
                 " \n".join([str(x) for x in self.sizes])
                 )
 
-    def toJson(self):
+    def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__)
