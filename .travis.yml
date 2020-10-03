@@ -8,4 +8,4 @@ jobs:
     - stage: code-style
       script: flake8 ./
     - stage: static-analyze
-      script: pylint main.py zara.py
+      script: pylint *.py

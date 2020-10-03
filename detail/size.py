@@ -1,7 +1,14 @@
+"""
+Size class
+"""
 import json
+
+# pylint: disable=missing-function-docstring
 
 
 class Size:
+    """Size class"""
+
     def __init__(self, label: str, size: str, disable: bool):
         self.label = label
         self.size = size
@@ -13,5 +20,5 @@ class Size:
                 + str(self.disable)
                 )
 
-    def toJson(self):
+    def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__)
