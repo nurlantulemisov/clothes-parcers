@@ -4,8 +4,8 @@ Detail class
 
 from typing import List
 import json
-from size import Size
-from price import Price
+from item.size import Size
+from item.price import Price
 
 
 # pylint: disable=missing-function-docstring

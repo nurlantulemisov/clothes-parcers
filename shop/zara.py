@@ -3,16 +3,16 @@ Zara parcer
 """
 
 import collections
-import enum
 from typing import List
 from selenium import webdriver
-from detail import Size, Detail, Price
+from item.detail import Detail
+from item.size import Size
+from item.price import Price
 import settings
 
 
-class Zara(enum.Enum):
+class Zara:
     """Zara parcer class"""
-    parcer_code = 1
 
     def __init__(self, item_code: str, isset_thumbnail: bool = False):
         self.item_code = item_code

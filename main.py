@@ -5,45 +5,32 @@
 """
 
 import json
-import pika
 import daemon
-import zara
+from shop.zara import Zara
+from shop.shop_enum import ShopEnum
 import settings
+import custom_queue.consume as queue
 
 
-def task_handle(msg: str):
+def task_handle():
     """Callback consumer"""
-    data = json.loads(msg)
-    item_data = data['clothes']
-    if item_data['shop'] == zara.Zara.parcer_code:
-        print('Zara process starting')
-        zara_clothes = zara.Zara(item_data['code'])
-        detail_zara = zara_clothes.run()
-        print(detail_zara)
-        print('Zara process stoping')
+    def callback(msg: str):
+        data = json.loads(msg)
+        item_data = data['clothes']
+
+        if item_data['shop'] == ShopEnum.ZARA.value:
+            print('Zara process starting')
+            zara_clothes = Zara(item_data['code'])
+            detail_zara = zara_clothes.run()
+            print(detail_zara)
+            print('Zara process stoping')
+    return callback
 
 
-def callback(channel, method, properties, body: str):
-    # pylint: disable=unused-argument
-    """Callback consumer"""
-    task_handle(body)
-
-
-def consume():
-    """daemon consumer"""
-    url = settings.CLOUDAMQP_URL
-    params = pika.URLParameters(url)
-    connection = pika.BlockingConnection(params)
-    channel = connection.channel()  # start a channel
-    channel.queue_declare(queue='parcerProcess', durable=True)
-
-    channel.basic_consume('parcerProcess',
-                          callback,
-                          auto_ack=True)
-
-    channel.start_consuming()
-    connection.close()
-
+print('Start proccessing')
+consumer = queue.Consume(settings.CLOUDAMQP_URL, 'parcerProcess')
+channel = consumer.channel(task_handle())
+print('Start start_consuming')
 
 with daemon.DaemonContext():
-    consume()
+    channel.start_consuming()
