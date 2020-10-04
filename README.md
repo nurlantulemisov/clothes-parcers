@@ -10,10 +10,17 @@
 
 Dockerfile - еще не готов
 
+```bash
+cp env.dist .env
+echo "DRIVER_PATH=путь до драйвера" > .env
+echo "CLOUDAMQP_URL=rabbit-url" > .env
+```
+
 ### Rrequirements
 
 - python 3.7
 - pip3
+- selenium
 
 ```bash
 pip3 install -r requirements.txt
