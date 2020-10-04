@@ -8,10 +8,11 @@ from selenium import webdriver
 from item.detail import Detail
 from item.size import Size
 from item.price import Price
+from shop.shop_interface import ShopInterface
 import settings
 
 
-class Zara:
+class Zara(ShopInterface):
     """Zara parcer class"""
 
     def __init__(self, item_code: str, isset_thumbnail: bool = False):
