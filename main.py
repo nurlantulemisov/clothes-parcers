@@ -6,24 +6,26 @@
 
 import json
 import daemon
-from shop.zara import Zara
-from shop.shop_enum import ShopEnum
+from shop.shop_factory import ShopFactory
 import settings
 import custom_queue.consume as queue
 
 
+def decode_message(msg: str) -> list:
+    """ Parce message and get playload"""
+    data = json.loads(msg)
+    return data['clothes']
+
 def task_handle():
     """Callback consumer"""
     def callback(msg: str):
-        data = json.loads(msg)
-        item_data = data['clothes']
-
-        if item_data['shop'] == ShopEnum.ZARA.value:
-            print('Zara process starting')
-            zara_clothes = Zara(item_data['code'])
-            detail_zara = zara_clothes.run()
-            print(detail_zara)
-            print('Zara process stoping')
+        item_data = decode_message(msg)
+        print('Zara process starting')
+        factory = ShopFactory()
+        shop = factory.shop(int(item_data['shop']), item_data['code'])
+        detail_zara = shop.run()
+        print(detail_zara)
+        print('Zara process stoping')
     return callback
 
 

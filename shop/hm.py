@@ -3,20 +3,21 @@ H&M parcer
 """
 
 
-import enum
 from typing import List
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from detail import Size, Price, Detail
+from item.detail import Detail
+from item.size import Size
+from item.price import Price
+from shop.shop_interface import ShopInterface
 import settings
 
 
 # pylint: disable=missing-function-docstring
-class HM(enum.Enum):
+class HM(ShopInterface):
     """HM parcer class"""
-    parcer_code = 2
 
     def __init__(self, item_code: str, isset_thumbnail: bool = False):
         self.item_code = item_code
