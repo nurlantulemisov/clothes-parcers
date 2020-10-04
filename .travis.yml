@@ -8,4 +8,4 @@ jobs:
     - stage: code-style
       script: flake8 ./
     - stage: static-analyze
-      script: pylint *.py
+      script: find . -type f -name "*.py" | xargs pylint 

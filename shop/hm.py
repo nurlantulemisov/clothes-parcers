@@ -9,9 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from detail.size import Size
-from detail.price import Price
-from detail.detail import Detail
+from detail import Size, Price, Detail
 import settings
 
 

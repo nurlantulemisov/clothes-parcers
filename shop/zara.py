@@ -6,9 +6,7 @@ import collections
 import enum
 from typing import List
 from selenium import webdriver
-from detail.size import Size
-from detail.detail import Detail
-from detail.price import Price
+from detail import Size, Detail, Price
 import settings
 
 
