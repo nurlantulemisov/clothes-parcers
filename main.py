@@ -16,6 +16,7 @@ def decode_message(msg: str) -> list:
     data = json.loads(msg)
     return data['clothes']
 
+
 def task_handle():
     """Callback consumer"""
     def callback(msg: str):
