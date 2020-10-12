@@ -45,5 +45,4 @@ class Levi(ShopInterface):
             '//*[@id="pdpRootInstance"]/div/div/div[1]/div/div/div[3]/div[2]/div[1]/div/span[3]')
         clothes = Detail('', reference, thumbnail, self.find_color(
             driver), self.find_sizes(driver), price)
-
         return clothes
